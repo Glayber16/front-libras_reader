@@ -1,4 +1,4 @@
-import LibrasDetector from './components/Detector'
+import LibrasDetector from './pages/Detector';
 
 function App() {
   return (
