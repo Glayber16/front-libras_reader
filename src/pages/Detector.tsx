@@ -8,7 +8,7 @@ export default function LibrasDetector() {
   const { webcamRef, getVideoFrame } = useWebcam();
   const { predictions, send, isConnected } = useLibrasWS("ws://localhost:8000/ws");
 
-  const FPS_INTERVAL = 100;
+  const FPS_INTERVAL = 150;
 
   useEffect(() => {
     const intervalId = setInterval(() => {

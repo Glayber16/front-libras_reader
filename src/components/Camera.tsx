@@ -7,18 +7,21 @@ type Props = {
 
 export function Camera({ webcamRef }: Props) {
   return (
-    <div className="relative w-full max-w-2xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl border-4 border-gray-800">
+    <div className="...">
       <Webcam
         ref={webcamRef}
         audio={false}
         screenshotFormat="image/jpeg"
-        width={640}
-        height={480}
-        className="w-full h-full object-cover scale-x-[-1]"
-        videoConstraints={{
-          facingMode: "user",
-          width: 640,
-          height: 480
+        screenshotQuality={0.5} 
+        width={320}            
+        height={240}
+        
+        className="w-full h-full object-cover scale-x-[-1]" 
+        
+        videoConstraints={{ 
+            facingMode: "user",
+            width: { ideal: 640 }, 
+            height: { ideal: 480 } 
         }}
       />
     </div>
