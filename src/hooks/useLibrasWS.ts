@@ -1,18 +1,32 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
+type PredictionData = {
+  letra: string;
+  confianca: number;
+};
+
+type WSResponse = {
+  mlp?: PredictionData;
+  cnn?: PredictionData;
+};
+
 type WSMessage = {
   image: string;
 };
 
-type WSResponse = {
-  letter?: string;
-};
-
 export function useLibrasWS(url: string) {
   const ws = useRef<WebSocket | null>(null);
-  const [letter, setLetter] = useState("...");
-  const [isConnected, setIsConnected] = useState(false);
   const timeoutRef = useRef<number | null>(null);
+
+  const [predictions, setPredictions] = useState<{
+    mlp: PredictionData;
+    cnn: PredictionData;
+  }>({
+    mlp: { letra: "...", confianca: 0 },
+    cnn: { letra: "...", confianca: 0 },
+  });
+
+  const [isConnected, setIsConnected] = useState(false);
 
   const connect = useCallback(() => {
     if (
@@ -27,11 +41,13 @@ export function useLibrasWS(url: string) {
     ws.current = socket;
 
     socket.onopen = () => {
+      console.log("WebSocket conectado");
       setIsConnected(true);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
 
     socket.onclose = () => {
+      console.log("WebSocket desconectado. Tentando reconectar...");
       setIsConnected(false);
       ws.current = null;
 
@@ -40,18 +56,21 @@ export function useLibrasWS(url: string) {
       }, 2000);
     };
 
-    socket.onerror = () => {
+    socket.onerror = (err) => {
+      console.error("Erro no WebSocket:", err);
       socket.close();
     };
 
     socket.onmessage = (event) => {
       try {
         const data: WSResponse = JSON.parse(event.data);
-        if (data.letter) {
-          setLetter(data.letter);
-        }
-      } catch {
 
+        setPredictions((prev) => ({
+          mlp: data.mlp || prev.mlp,
+          cnn: data.cnn || prev.cnn,
+        }));
+      } catch (error) {
+        console.error("Erro ao ler JSON:", error);
       }
     };
   }, [url]);
@@ -72,5 +91,5 @@ export function useLibrasWS(url: string) {
     }
   }, []);
 
-  return { letter, isConnected, send };
+  return { predictions, isConnected, send };
 }

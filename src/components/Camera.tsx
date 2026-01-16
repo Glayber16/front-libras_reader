@@ -11,8 +11,15 @@ export function Camera({ webcamRef }: Props) {
       <Webcam
         ref={webcamRef}
         audio={false}
+        screenshotFormat="image/jpeg"
+        width={640}
+        height={480}
         className="w-full h-full object-cover scale-x-[-1]"
-        videoConstraints={{ facingMode: "user" }}
+        videoConstraints={{
+          facingMode: "user",
+          width: 640,
+          height: 480
+        }}
       />
     </div>
   );
