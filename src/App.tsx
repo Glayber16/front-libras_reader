@@ -6,7 +6,7 @@ function App() {
       
       <header className="w-full py-6 px-8  bg-slate-800 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-2xl font-bold bg-purple-600 bg-clip-text text-transparent">
             Leitor de Libras
           </h1>
           <p className="text-sm text-white ">

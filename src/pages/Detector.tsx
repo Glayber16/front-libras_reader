@@ -26,7 +26,7 @@ export default function LibrasDetector() {
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto p-6 space-y-8 min-h-screen bg-gray-900 text-white">
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-red-400">
+        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-transparent bg-clip-text bg-white">
           Batalha de IAs: LIBRAS
         </h1>
         <div className="flex items-center justify-center gap-2">
@@ -50,7 +50,7 @@ export default function LibrasDetector() {
           title="Rede MLP (Geometria)"
           letter={predictions.mlp.letra}
           confidence={predictions.mlp.confianca}
-          colorClass="text-blue-500"
+          colorClass="text-green-500"
         />
 
         <Prediction
