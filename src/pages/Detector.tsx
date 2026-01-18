@@ -6,7 +6,7 @@ import { useLibrasWS } from "../hooks/useLibrasWS";
 
 export default function LibrasDetector() {
   const { webcamRef, getVideoFrame } = useWebcam();
-  const { predictions, send, isConnected } = useLibrasWS("ws://localhost:8000/ws");
+  const { predictions, roi, send, isConnected } = useLibrasWS("ws://localhost:8000/ws");
 
   const FPS_INTERVAL = 150;
 
@@ -41,8 +41,9 @@ export default function LibrasDetector() {
         </div>
       </div>
 
-      <div className="relative w-full max-w-2xl shadow-2xl rounded-xl overflow-hidden border border-gray-700">
-        <Camera webcamRef={webcamRef} />
+     <div className="relative w-full max-w-2xl ...">
+        {/* Passa o ROI para a Camera */}
+        <Camera webcamRef={webcamRef} roi={roi} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-3xl">
