@@ -42,7 +42,6 @@ export default function LibrasDetector() {
       </div>
 
      <div className="relative w-full max-w-2xl ...">
-        {/* Passa o ROI para a Camera */}
         <Camera webcamRef={webcamRef} roi={roi} />
       </div>
 

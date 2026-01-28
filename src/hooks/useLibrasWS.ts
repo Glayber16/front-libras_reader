@@ -2,13 +2,12 @@ import { useEffect, useRef, useState, useCallback } from "react";
 
 type PredictionData = { letra: string; confianca: number; };
 
-// Tipagem do Quadrado
 type ROI = { x: number; y: number; w: number; h: number; } | null;
 
 type WSResponse = {
   mlp?: PredictionData;
   cnn?: PredictionData;
-  roi?: ROI; // <--- Recebemos apenas numeros
+  roi?: ROI; 
 };
 
 export function useLibrasWS(url: string) {
@@ -26,8 +25,6 @@ export function useLibrasWS(url: string) {
 
   const [isConnected, setIsConnected] = useState(false);
 
-  // ... (Connect e Send iguais ao anterior) ...
-  // Vou resumir a parte do onmessage:
 
   const connect = useCallback(() => {
      if (ws.current?.readyState === WebSocket.OPEN) return;
@@ -45,7 +42,7 @@ export function useLibrasWS(url: string) {
                  mlp: res.mlp || prev.predictions.mlp,
                  cnn: res.cnn || prev.predictions.cnn,
               },
-              roi: res.roi || null // Salva as coordenadas
+              roi: res.roi || null 
            }));
         } catch {}
      };
